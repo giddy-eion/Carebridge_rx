@@ -46,9 +46,9 @@ export function MessagesScreen({ currentUserId }: { currentUserId: string }) {
     const otherId = otherParticipantId(active.participantIds, currentUserId);
     const other = lookupParticipant(otherId);
     return (
-      <div className="flex flex-col h-full">
+      <div className="fixed inset-0 bottom-16 flex flex-col bg-surface" style={{ maxWidth: "448px", margin: "0 auto" }}>
         {/* Thread header */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-surface-raised">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-surface-raised flex-shrink-0">
           <button
             onClick={() => setActiveConversationId(null)}
             className="w-8 h-8 rounded-full bg-surface shadow-[0_2px_6px_rgba(16,22,43,0.08)] flex items-center justify-center flex-shrink-0"
@@ -63,8 +63,8 @@ export function MessagesScreen({ currentUserId }: { currentUserId: string }) {
           </div>
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2">
+        {/* Messages — scrollable middle */}
+        <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2 pb-24">
           {active.messages.map((m) => {
             const mine = m.senderId === currentUserId;
             return (
@@ -88,8 +88,8 @@ export function MessagesScreen({ currentUserId }: { currentUserId: string }) {
           <div ref={bottomRef} />
         </div>
 
-        {/* Input bar */}
-        <div className="flex items-center gap-2 px-4 py-3 border-t border-border bg-surface-raised">
+        {/* Input bar — pinned to bottom */}
+        <div className="flex items-center gap-2 px-4 py-3 border-t border-border bg-surface-raised flex-shrink-0">
           <input
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
@@ -116,11 +116,6 @@ export function MessagesScreen({ currentUserId }: { currentUserId: string }) {
     const other = lookupParticipant(otherId);
     return other.name.toLowerCase().includes(search.toLowerCase());
   });
-
-  const totalUnread = myConversations.reduce((sum, c) => {
-    const unread = c.messages.filter((m) => m.senderId !== currentUserId).length;
-    return sum + (unread > 0 ? unread : 0);
-  }, 0);
 
   return (
     <div className="flex flex-col h-full">
@@ -202,7 +197,6 @@ export function MessagesScreen({ currentUserId }: { currentUserId: string }) {
           );
         })}
 
-        {/* All caught up empty state */}
         {filtered.length === 0 && (
           <div className="flex flex-col items-center gap-2 py-12">
             <div className="w-16 h-16 rounded-full bg-brand-50 flex items-center justify-center">
