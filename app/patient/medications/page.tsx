@@ -108,7 +108,7 @@ export default function PatientMedicationsPage() {
                     {med.dosage}
                   </span>
                   <span className="bg-surface-sunken text-foreground-muted text-[10px] rounded-full px-2 py-0.5">
-                    {med.form}
+                    Tablet
                   </span>
                 </div>
               </div>
@@ -136,7 +136,7 @@ export default function PatientMedicationsPage() {
                           <span className="text-[13px] font-semibold text-brand-500">{time}</span>
                         </div>
                         <span className="text-[11px] text-foreground-muted">
-                          1 {med.form} · {i === 0 ? "Morning" : "Evening"} dose
+                          1 Tablet · {i === 0 ? "Morning" : "Evening"} dose
                         </span>
                       </div>
                     ))}
