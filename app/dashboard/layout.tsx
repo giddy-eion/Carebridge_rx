@@ -26,7 +26,7 @@ export default function ClinicianLayout({ children }: { children: React.ReactNod
     <div className="min-h-screen bg-surface flex flex-col max-w-md mx-auto">
       <AppHeader identityLabel={account.name} alertCount={activeAlertCount} />
       <NavDrawer role="clinician" />
-      <div className="flex-1 overflow-y-auto pb-2">{children}</div>
+      <div className="flex-1 min-h-0 overflow-y-auto pb-2 flex flex-col">{children}</div>
       <BottomNav role="clinician" />
     </div>
   );
